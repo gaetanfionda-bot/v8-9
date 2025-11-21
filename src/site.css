@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* STYLE GLOBAL */
+body {
+  background-color: #000000;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: "Cinzel", serif;
+}
+
+/* HALO PULSE AUTOUR DES ÉLÉMENTS ROUGES */
+@keyframes haloPulse {
+  0%,100%{
+    box-shadow:
+      0 0 12px 4px rgba(204,16,16,.45),
+      0 0 40px 10px rgba(204,16,16,.3);
+  }
+  50%{
+    box-shadow:
+      0 0 28px 12px rgba(204,16,16,.9),
+      0 0 75px 26px rgba(204,16,16,.6);
+  }
+}
+.halo-sync {
+  animation: haloPulse 4s ease-in-out infinite;
+  transition: all .3s ease;
+}
+
+/* GLOW TEXTE ROUGE */
+@keyframes textGlow {
+  0%,100%{
+    text-shadow:
+      0 0 10px rgba(204,16,16,.45),
+      0 0 30px rgba(204,16,16,.25);
+  }
+  50%{
+    text-shadow:
+      0 0 20px rgba(204,16,16,.95),
+      0 0 40px rgba(204,16,16,.7);
+  }
+}
+.title-halo {
+  animation: textGlow 4s ease-in-out infinite;
+}
+
+/* LOGO NIGHT VISION PULSÉ */
+@keyframes pulseGlowLogo {
+  0%,100% {
+    text-shadow:
+      0 0 20px rgba(204,16,16,0.6),
+      0 0 40px rgba(204,16,16,0.4);
+    color: #CC1010;
+  }
+  50% {
+    text-shadow:
+      0 0 40px rgba(204,16,16,0.95),
+      0 0 80px rgba(204,16,16,0.6);
+    color: #ff3030;
+  }
+}
+.logo-animated {
+  animation: pulseGlowLogo 2s infinite ease-in-out;
+}
+
+/* HEADER GLASS NOIR */
+.nv-header {
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,.78);
+  border-bottom: 1px solid rgba(38,38,38,.9);
+}
+
+/* CARTES PREMIUM */
+.card {
+  background:#0b0b0b;
+  border:1px solid #262626;
+}
+
+/* FADE-IN DES BLOCS AU SCROLL */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HALO PULSE LOGO SYNC (header logo) */
+@keyframes nvGlow {
+  0%,100% {
+    filter:
+      drop-shadow(0 0 8px rgba(255,0,0,0.6))
+      drop-shadow(0 0 24px rgba(255,0,0,0.25));
+    opacity: 0.8;
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 16px rgba(255,0,0,1))
+      drop-shadow(0 0 48px rgba(255,0,0,0.8));
+    opacity: 1;
+  }
+}
+.glow-pulse {
+  animation: nvGlow 4s ease-in-out infinite;
+}
+
+/* IMMERSION SLIDER PANORAMIQUE */
+.nv-immersion-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio:  16 / 7.5;
+  overflow: hidden;
+}
+
+.nv-immersion-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+  filter: brightness(1) saturate(1.05);
+}
+
+.nv-immersion-img.active {
+  opacity: 1;
+}
