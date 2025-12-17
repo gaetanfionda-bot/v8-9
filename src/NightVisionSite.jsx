@@ -26,7 +26,11 @@ function SectionReveal({ children }) {
     const el = ref.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      (entries) => entries.forEach(e => e.isIntersecting && setVisible(true)),
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setVisible(true);
+        });
+      },
       { threshold: 0.15 }
     );
     obs.observe(el);
@@ -56,7 +60,7 @@ function Header() {
           </span>
         </div>
 
-        <nav className="hidden md:flex gap-8 text-[10px] md:text-xs text-neutral-300">
+        <nav className="hidden items-center gap-8 md:flex text-[10px] md:text-xs text-neutral-300">
           <a href="#solutions" className="hover:text-white">SOLUTIONS</a>
           <a href="#avantages" className="hover:text-white">AVANTAGES</a>
           <a href="#galerie" className="hover:text-white">GALERIE</a>
@@ -80,11 +84,11 @@ function HeroSection() {
     <section className="relative z-10 py-16 text-center">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(204,16,16,0.22)_0%,transparent_70%)] blur-3xl" />
 
-      <h1 className="logo-animated text-5xl md:text-6xl font-bold tracking-[0.3em]">
+      <h1 className="logo-animated text-5xl md:text-6xl font-bold leading-tight tracking-[0.3em]">
         NIGHT VISION
       </h1>
 
-      <h2 className="title-halo mt-8 bg-gradient-to-r from-[#CC1010] to-[#ff3b3b] bg-clip-text text-3xl md:text-4xl font-bold text-transparent">
+      <h2 className="title-halo mt-8 bg-gradient-to-r from-[#CC1010] to-[#ff3b3b] bg-clip-text text-3xl md:text-4xl font-bold text-transparent leading-tight">
         DISTRIBUTEURS AUTOMATIQUES DE LUNETTES
       </h2>
 
@@ -95,25 +99,25 @@ function HeroSection() {
   );
 }
 
-/* SOLUTIONS — HALO SUPPRIMÉ */
+/* SOLUTIONS */
 function SolutionsSection() {
   const solutions = [
     {
       img: "/assets/CLUBS.png",
       title: "CLUBS",
-      desc: "CAPACITÉ 130 LUNETTES",
+      desc: "IMPACT VISUEL, CAPACITÉ HAUTE, INTÉGRATION PREMIUM EN SALLE.",
       cta: "ÉQUIPER MON CLUB",
     },
     {
       img: "/assets/PETITS-CLUBS-BARS.png",
       title: "PETITS CLUBS / BARS",
-      desc: "CAPACITÉ 50 LUNETTES",
+      desc: "FORMAT COMPACT, LUMIÈRE ROUGE DISTINCTIVE, LOOK LUXE MÊME EN ESPACE RÉDUIT.",
       cta: "ÉQUIPER MON CLUB",
     },
     {
       img: "/assets/FESTIVALS.png",
       title: "FESTIVALS",
-      desc: "CAPACITÉ 600 LUNETTES",
+      desc: "ROBUSTE, MOBILE, PRÊT À TENIR TOUTE LA NUIT EN EXTÉRIEUR.",
       cta: "ÉQUIPER MON FESTIVAL",
     },
   ];
@@ -126,13 +130,18 @@ function SolutionsSection() {
       {solutions.map(({ img, title, desc, cta }) => (
         <div
           key={title}
-          className="card rounded-2xl overflow-hidden flex flex-col transition-all"
+          // ✅ HALO ROUGE SUPPRIMÉ (hover shadow enlevé)
+          className="card rounded-2xl overflow-hidden transition-all flex flex-col"
         >
-          <img
-            src={img}
-            alt={title}
-            className="w-full h-[450px] object-cover opacity-90"
-          />
+          <div className="relative">
+            <img
+              src={img}
+              alt={title}
+              className="w-full h-[450px] object-cover opacity-90"
+            />
+            {/* ✅ HALO ROUGE SUPPRIMÉ (overlay rouge enlevé) */}
+            {/* <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(204,16,16,0.28)_0%,transparent_70%)] mix-blend-screen blur-xl" /> */}
+          </div>
 
           <div className="p-6 text-center flex flex-col flex-1">
             <h3 className="text-xl md:text-2xl text-[#CC1010] mb-2">
@@ -157,25 +166,40 @@ function SolutionsSection() {
 /* AVANTAGES */
 function AvantagesSection() {
   const avantages = [
-    { title: "REVENU SUPPLÉMENTAIRE", desc: "UN FLUX COMPLÉMENTAIRE ET RÉGULIER POUR LE LIEU." },
-    { title: "MEILLEURE EXPÉRIENCE CLIENT", desc: "SERVICE PREMIUM, RAPIDE, SANS RUPTURE DE SOIRÉE." },
-    { title: "PAIEMENT SANS CONTACT", desc: "RAPIDE, SÛR, INTUITIF." },
-    { title: "0 COMPLEXITÉ POUR VOUS", desc: "INSTALLATION CLÉ EN MAIN. ON GÈRE." },
+    {
+      title: "REVENU SUPPLÉMENTAIRE",
+      desc: "UN FLUX COMPLÉMENTAIRE ET RÉGULIER POUR LE LIEU.",
+    },
+    {
+      title: "MEILLEURE EXPÉRIENCE CLIENT",
+      desc: "SERVICE PREMIUM, RAPIDE, SANS RUPTURE DE SOIRÉE.",
+    },
+    {
+      title: "PAIEMENT SANS CONTACT",
+      desc: "RAPIDE, SÛR, INTUITIF.",
+    },
+    {
+      title: "0 COMPLEXITÉ POUR VOUS",
+      desc: "INSTALLATION CLÉ EN MAIN. ON GÈRE.",
+    },
   ];
 
   return (
-    <section id="avantages" className="mx-auto max-w-7xl px-6 pb-16 text-center">
+    <section
+      id="avantages"
+      className="mx-auto max-w-7xl px-6 pb-16 text-center"
+    >
       <h2 className="title-halo text-3xl mb-10">AVANTAGES</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {avantages.map(({ title, desc }) => (
           <div
             key={title}
-            className="card rounded-2xl p-8 hover:shadow-[0_0_45px_rgba(204,16,16,0.35)]"
+            className="card rounded-2xl p-8 hover:shadow-[0_0_45px_rgba(204,16,16,0.35)] text-center"
           >
-            <h3 className="halo-sync text-[#CC1010] mb-3 text-sm md:text-base">
+            <h3 className="halo-sync text-[#CC1010] text-sm md:text-base mb-3 leading-tight">
               {title}
             </h3>
-            <p className="text-neutral-300 text-[10px] md:text-sm normal-case">
+            <p className="text-neutral-300 text-[10px] md:text-sm leading-relaxed normal-case">
               {desc}
             </p>
           </div>
@@ -185,7 +209,7 @@ function AvantagesSection() {
   );
 }
 
-/* GALERIE */
+/* GALERIE / IMMERSION LIVE */
 function GalerieSection() {
   return (
     <section id="galerie" className="mx-auto max-w-7xl px-6 py-16">
@@ -195,7 +219,7 @@ function GalerieSection() {
   );
 }
 
-/* IMMERSION LIVE */
+/* IMMERSION LIVE slider panoramique */
 function ImmersionLive() {
   const frames = [
     "/assets/immersion-1.png",
@@ -207,21 +231,35 @@ function ImmersionLive() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(() => setIndex(i => (i + 1) % frames.length), 4000);
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1) % frames.length);
+    }, 4000);
     return () => clearInterval(id);
-  }, []);
+  }, [frames.length]);
 
   return (
     <div className="rounded-2xl overflow-hidden border border-neutral-800 bg-black/40 p-4">
-      <div className="relative overflow-hidden rounded-xl border border-neutral-800 group hover:shadow-[0_0_60px_rgba(204,16,16,0.55)] transition-all">
-        {frames.map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            alt=""
-            className={`nv-immersion-img ${i === index ? "active" : ""}`}
-          />
-        ))}
+      <div className="relative w-full overflow-hidden rounded-xl border border-neutral-800 group hover:shadow-[0_0_60px_rgba(204,16,16,0.55)] hover:border-[#CC1010]/60 transition-all duration-700">
+
+        <div className="nv-immersion-wrapper">
+          {frames.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`Night Vision Live ${i + 1}`}
+              className={`nv-immersion-img ${i === index ? "active" : ""}`}
+            />
+          ))}
+        </div>
+
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-col items-center text-center">
+          <span className="text-[#CC1010] text-base md:text-lg font-bold tracking-[0.3em] drop-shadow-[0_0_20px_rgba(204,16,16,0.6)]">
+            NIGHT VISION
+          </span>
+          <span className="text-[8px] md:text-[10px] text-neutral-300 tracking-widest mt-2">
+            HAUT DE GAMME · CONTACTLESS · ALL NIGHT
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -230,13 +268,167 @@ function ImmersionLive() {
 /* CONTACT */
 function ContactSection() {
   return (
-    <section id="contact" className="mx-auto max-w-3xl px-6 py-20 text-center">
-      <h2 className="title-halo text-3xl mb-6">DEMANDER UNE INSTALLATION</h2>
+    <section
+      id="contact"
+      className="mx-auto max-w-3xl px-6 py-20 text-center"
+    >
+      <h2 className="title-halo text-3xl mb-6">
+        DEMANDER UNE INSTALLATION
+      </h2>
       <p className="text-neutral-300 mb-10 text-xs md:text-sm normal-case">
-        REJOIGNEZ LES LIEUX ÉQUIPÉS NIGHT VISION ET OFFREZ À VOS CLIENTS UNE EXPÉRIENCE UNIQUE.
+        REJOIGNEZ LES LIEUX ÉQUIPÉS NIGHT VISION ET OFFREZ À VOS CLIENTS
+        UNE EXPÉRIENCE UNIQUE.
       </p>
       <InstallForm />
     </section>
+  );
+}
+
+function InstallForm() {
+  const [sent, setSent] = useState(false);
+  const [err, setErr] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+
+  function validatePhone(value) {
+    if (!value) return true;
+    const regex = /^\+?[0-9\s().-]{6,20}$/;
+    return regex.test(value);
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setErr("");
+    setPhoneError("");
+
+    const tel = e.target.Telephone.value;
+    if (!validatePhone(tel)) {
+      setPhoneError("Format de téléphone invalide (ex: +33 6 12 34 56 78)");
+      return;
+    }
+
+    try {
+      const form = e.currentTarget;
+      const data = new FormData(form);
+      await fetch("/", { method: "POST", body: data });
+      setSent(true);
+      form.reset();
+    } catch {
+      setErr("Problème lors de l'envoi. Réessaie.");
+    }
+  }
+
+  if (sent) {
+    return (
+      <div className="rounded-2xl border border-neutral-800 bg-neutral-950 p-8">
+        <p className="text-[#CC1010]">✔ DEMANDE ENVOYÉE</p>
+        <p className="mt-2 text-neutral-300 text-[11px] md:text-sm normal-case">
+          Merci ! Tu recevras un email de confirmation si activé sur Netlify.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      name="installation"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="_gotcha"
+      onSubmit={handleSubmit}
+      className="grid grid-cols-1 gap-4 text-left md:grid-cols-2"
+    >
+      <input type="hidden" name="form-name" value="installation" />
+      <p className="hidden">
+        <label>
+          Ne pas remplir: <input name="_gotcha" />
+        </label>
+      </p>
+
+      <input
+        name="Etablissement"
+        placeholder="Nom de l’établissement"
+        required
+        className="col-span-2 rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-3 focus:border-[#CC1010]"
+      />
+
+      <select
+        name="Type"
+        className="rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-3 focus:border-[#CC1010]"
+      >
+        <option>CLUB</option>
+        <option>BAR / PETIT CLUB</option>
+        <option>FESTIVAL</option>
+      </select>
+
+      <input
+        name="Ville"
+        placeholder="Ville"
+        required
+        className="rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-3 focus:border-[#CC1010]"
+      />
+
+      <div className="flex flex-col">
+        <label htmlFor="Capacite" className="mb-1 text-xs md:text-sm text-neutral-400">
+          Capacité (nombre de places)
+        </label>
+        <input
+          id="Capacite"
+          name="Capacite"
+          type="number"
+          min="0"
+          step="1"
+          required
+          placeholder="Ex. 1000"
+          className="rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-3 focus:border-[#CC1010]"
+        />
+      </div>
+
+      <input
+        name="Telephone"
+        type="tel"
+        required
+        placeholder="Numéro de téléphone (ex: +33 6 12 34 56 78)"
+        className={`rounded-xl bg-neutral-950 px-4 py-3 focus:border-[#CC1010] ${
+          phoneError
+            ? "border-red-500 ring-2 ring-red-500/50 shadow-[0_0_16px_rgba(204,16,16,0.45)]"
+            : "border-neutral-800"
+        }`}
+        aria-invalid={Boolean(phoneError)}
+        aria-describedby={phoneError ? "tel-error" : undefined}
+      />
+      {phoneError && (
+        <p id="tel-error" className="col-span-2 text-red-400 text-xs md:text-sm">
+          {phoneError}
+        </p>
+      )}
+
+      <input
+        name="Email"
+        type="email"
+        placeholder="Email"
+        required
+        className="rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-3 focus:border-[#CC1010]"
+      />
+
+      <textarea
+        name="Message"
+        placeholder="Votre message"
+        rows={4}
+        className="col-span-2 rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-3 focus:border-[#CC1010] normal-case"
+      />
+
+      <div className="col-span-2 mt-4 text-center">
+        <button
+          type="submit"
+          className="halo-sync rounded-xl bg-[#CC1010] px-6 py-3 text-white text-xs md:text-sm"
+        >
+          ENVOYER MA DEMANDE
+        </button>
+        {err && (
+          <p className="mt-3 text-xs md:text-sm text-red-400">{err}</p>
+        )}
+      </div>
+    </form>
   );
 }
 
