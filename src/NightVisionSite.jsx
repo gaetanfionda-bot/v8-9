@@ -105,19 +105,19 @@ function SolutionsSection() {
     {
       img: "/assets/CLUBS.png",
       title: "CLUBS",
-      desc: "IMPACT VISUEL, CAPACITÉ HAUTE, INTÉGRATION PREMIUM EN SALLE.",
+      desc: " CAPACITÉ 120 LUNETTES ",
       cta: "ÉQUIPER MON CLUB",
     },
     {
       img: "/assets/PETITS-CLUBS-BARS.png",
       title: "PETITS CLUBS / BARS",
-      desc: "FORMAT COMPACT, LUMIÈRE ROUGE DISTINCTIVE, LOOK LUXE MÊME EN ESPACE RÉDUIT.",
+      desc: " CAPACITÉ 40 LUNETTES ",
       cta: "ÉQUIPER MON CLUB",
     },
     {
       img: "/assets/FESTIVALS.png",
       title: "FESTIVALS",
-      desc: "ROBUSTE, MOBILE, PRÊT À TENIR TOUTE LA NUIT EN EXTÉRIEUR.",
+      desc: " CAPACITÉ 600 LUNETTES ",
       cta: "ÉQUIPER MON FESTIVAL",
     },
   ];
