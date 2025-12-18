@@ -174,7 +174,6 @@ function AvantagesSection() {
     },
     {
       title: "PAIEMENT SANS CONTACT",
-      desc: "RAPIDE, SÛR, INTUITIF.",
     },
     {
       title: "INSTALLATION CLÉ EN MAIN",
