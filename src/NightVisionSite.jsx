@@ -102,16 +102,16 @@ function HeroSection() {
 /* SOLUTIONS */
 function SolutionsSection() {
   const solutions = [
+     {
+      img: "/assets/PETITS-CLUBS-BARS.png",
+      title: "PETITS CLUBS / BARS",
+      desc: " CAPACITÉ 40 LUNETTES ",
+      cta: "ÉQUIPER MON CLUB",
+    },
     {
       img: "/assets/CLUBS.png",
       title: "CLUBS",
       desc: " CAPACITÉ 120 LUNETTES ",
-      cta: "ÉQUIPER MON CLUB",
-    },
-    {
-      img: "/assets/PETITS-CLUBS-BARS.png",
-      title: "PETITS CLUBS / BARS",
-      desc: " CAPACITÉ 40 LUNETTES ",
       cta: "ÉQUIPER MON CLUB",
     },
     {
@@ -168,19 +168,16 @@ function AvantagesSection() {
   const avantages = [
     {
       title: "REVENU SUPPLÉMENTAIRE",
-      desc: "UN FLUX COMPLÉMENTAIRE ET RÉGULIER POUR LE LIEU.",
     },
     {
       title: "MEILLEURE EXPÉRIENCE CLIENT",
-      desc: "SERVICE PREMIUM, RAPIDE, SANS RUPTURE DE SOIRÉE.",
     },
     {
       title: "PAIEMENT SANS CONTACT",
       desc: "RAPIDE, SÛR, INTUITIF.",
     },
     {
-      title: "0 COMPLEXITÉ POUR VOUS",
-      desc: "INSTALLATION CLÉ EN MAIN. ON GÈRE.",
+      title: "INSTALLATION CLÉ EN MAIN",
     },
   ];
 
